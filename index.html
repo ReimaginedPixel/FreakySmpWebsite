@@ -32,8 +32,8 @@
                 </a>
             </div>
             <div class="nav-item">
-                <a href="#lore" class="nav-link">
-                    Lore
+                <a href="#gallery" class="nav-link">
+                    Gallery
                     <img src="assets/images/nav-lore.png" alt="" class="nav-img">
                 </a>
             </div>
@@ -56,9 +56,10 @@
         <div class="what-content">
             <div class="what-text">
                 <h2>What is Freaky SMP?</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisi, euismod euismod nisi nisi euismod.
-                <br><br>
-                Mauris nec turpis at urna dictum posuere. Etiam euismod, urna eu tincidunt consectetur, nisi.
+                <p>
+                    Freaky SMP began when I switched schools and wanted to create a fun way for my new classmates to connect. With voice chat and a chill vibe, it quickly became a hit. What started as a simple server turned into a thriving world with multiple seasons and an awesome group of players.
+                    <br><br>
+                    A lot of people really wanted to play, but over time the server got fewer players and more cheaters. It even became a meme to nuke the server. But in the end, that’s what made Freaky SMP stand out — the chaos, the memories, and the fact that it was a completely unique experience.
                 </p>
             </div>
             <div class="what-image-stack">
@@ -94,9 +95,8 @@
             </div>
             <div class="about-text">
                 <h2>About This Project</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. 
-                <br><br>
-                Suspendisse potenti. Etiam faucibus cursus urna. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.
+                <p>
+                    This project started as a small idea to bring people together through Minecraft. Over time, it grew into a community-driven experience full of creativity, chaos, and unforgettable memories. It's more than just a server — it's a story we've all written together.
                 </p>
             </div>
         </div>
@@ -280,8 +280,57 @@
         </div>
     </section>
 
+    <!-- Gallery section -->
+    <section id="gallery" class="section-gallery">
+        <div class="gallery-content">
+            <h2>Gallery</h2>
+            <p class="gallery-intro">Check out some of our best moments, videos, and screenshots from Freaky SMP!</p>
+            <div class="gallery-videos">
+                <h3>YouTube Videos</h3>
+                <div class="gallery-videos-grid">
+                    <div class="gallery-video">
+                        <iframe width="360" height="202" src="https://www.youtube.com/embed/Bwhid2g7S7k" title="Freaky SMP Video 1" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="gallery-video">
+                        <iframe width="360" height="202" src="https://www.youtube.com/embed/1vrImEDGMGc" title="Freaky SMP Video 2" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="gallery-video">
+                        <iframe width="360" height="202" src="https://www.youtube.com/embed/9_jzsPLX948" title="Freaky SMP Video 3" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-images">
+                <h3>Screenshots</h3>
+                <div class="gallery-images-grid">
+                    <img src="assets/images/gallery1.png" alt="Screenshot 1" class="gallery-img">
+                    <img src="assets/images/gallery2.png" alt="Screenshot 2" class="gallery-img">
+                    <img src="assets/images/gallery3.png" alt="Screenshot 3" class="gallery-img">
+                </div>
+            </div>
+            <div class="gallery-funny">
+                <h3>Clips & Funny Moments</h3>
+                <div class="gallery-funny-grid">
+                    <video class="gallery-clip" controls width="320">
+                        <source src="assets/clips/funny1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <video class="gallery-clip" controls width="320">
+                        <source src="assets/clips/funny2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <video class="gallery-clip" controls width="320">
+                        <source src="assets/clips/funny3.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Add GSAP CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
     <script src="js/main.js"></script>
     <script>
     // Add GSAP hover animation for image labels
@@ -303,6 +352,41 @@
         btn.addEventListener('click', function() {
             const box = btn.closest('.player-box');
             box.classList.toggle('open');
+        });
+    });
+
+    // GSAP fade-in on scroll for .what-text and .about-text
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray(['.what-text', '.about-text']).forEach(function(el) {
+        gsap.fromTo(el, 
+            { opacity: 0, y: 40 },
+            { 
+                opacity: 1, 
+                y: 0, 
+                duration: 0.8, 
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                }
+            }
+        );
+    });
+
+    // GSAP smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            const targetId = link.getAttribute('href').slice(1);
+            const target = document.getElementById(targetId);
+            if (target) {
+                e.preventDefault();
+                gsap.to(window, {
+                    duration: 0.8,
+                    scrollTo: { y: target, offsetY: 80 },
+                    ease: "power2.inOut"
+                });
+            }
         });
     });
     </script>
