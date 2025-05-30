@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <title>Freaky SMP Website</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- Minecraft font faces -->
     <link rel="stylesheet" href="fonts/fonts.css">
 </head>
 <body>
-    <!-- Blurred header from the top with clickable logo inside and navigation -->
+    <!-- Mobile menu toggle button (bottom right, not in header) -->
+    <button id="menu-toggle" aria-label="Open menu">
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+    </button>
+    <!-- Header with logo and navigation -->
     <header class="blurred-header">
         <a href="#" id="logo-link">
             <img src="assets/images/logo.png" alt="Logo" id="logo">
@@ -40,8 +45,9 @@
             </div>
         </nav>
     </header>
+
     <!-- Group photo at the top, full width -->
-    <img src="assets/images/group4.png" alt="Group Photo" style="width:100%;height:auto;display:block;">
+    <img src="assets/images/group4.png" alt="Group Photo" class="group-photo">
 
     <!-- Start Exploring button -->
     <div class="start-exploring-container">
@@ -56,26 +62,183 @@
         <div class="what-content">
             <div class="what-text">
                 <h2>What is Freaky SMP?</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisi, euismod euismod nisi nisi euismod. 
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisi, euismod euismod nisi nisi euismod.
                 <br><br>
-                Mauris nec turpis at urna dictum posuere. Etiam euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc, eget aliquam nisl nunc euismod nunc. Proin euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisi, euismod euismod nisi nisi euismod. 
-                <br><br>
-                Sed euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisi, euismod euismod nisi nisi euismod. Pellentesque euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisi, euismod euismod nisi nisi euismod.
+                Mauris nec turpis at urna dictum posuere. Etiam euismod, urna eu tincidunt consectetur, nisi.
                 </p>
             </div>
-            <div class="what-image what-image-grid">
-                <div class="what-image-row">
-                    <img src="assets/images/what-freakysmp-1.png" alt="Freaky SMP 1" />
-                    <img src="assets/images/what-freakysmp-2.png" alt="Freaky SMP 2" />
+            <div class="what-image-stack">
+                <div class="what-image-col">
+                    <div class="img-hover-wrap">
+                        <img src="assets/images/what-freakysmp-1.png" alt="Freaky SMP 1" data-hover="FreakySMP sezon 1 start" />
+                        <div class="img-hover-label">FreakySMP sezon 1 start</div>
+                    </div>
+                    <div class="img-hover-wrap">
+                        <img src="assets/images/what-freakysmp-2.png" alt="Freaky SMP 2" data-hover="FreakySMP sezon 2 start" />
+                        <div class="img-hover-label">FreakySMP sezon 2 start</div>
+                    </div>
                 </div>
-                <div class="what-image-row">
-                    <img src="assets/images/what-freakysmp-3.png" alt="Freaky SMP 3" />
+                <div class="what-image-col">
+                    <div class="img-hover-wrap">
+                        <img src="assets/images/what-freakysmp-3.png" alt="Freaky SMP 3" data-hover="FreakySMP sezon 3 start" />
+                        <div class="img-hover-label">FreakySMP sezon 3 start</div>
+                    </div>
+                    <div class="img-hover-wrap">
+                        <img src="assets/images/what-freakysmp-4.png" alt="Freaky SMP 4" data-hover="FreakySMP sezon 4 start" />
+                        <div class="img-hover-label">FreakySMP sezon 4 start</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- About section -->
+    <section id="about" class="section-about">
+        <div class="about-content">
+            <div class="about-image">
+                <img src="assets/images/about-project.png" alt="About This Project" class="about-image-big" />
+            </div>
+            <div class="about-text">
+                <h2>About This Project</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. 
+                <br><br>
+                Suspendisse potenti. Etiam faucibus cursus urna. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Players section -->
+    <section id="players" class="section-players">
+        <div class="players-intro">
+            <h2>Players</h2>
+            <p>Meet the members of Freaky SMP! Click the arrow to see more info.</p>
+        </div>
+        <div class="players-grid">
+            <!-- Example player box, repeat for all players -->
+            <div class="player-box">
+                <div class="player-main">
+                    <img class="player-avatar" src="assets/images/players/player1.png" alt="Player 1">
+                    <span class="player-name">Player 1</span>
+                    <button class="player-toggle" aria-label="Show more">&#9660;</button>
+                </div>
+                <div class="player-dropdown">
+                    <div class="player-dropdown-inner">
+                        <p>INFO about Player 1. Add more details here.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="player-box">
+                <div class="player-main">
+                    <img class="player-avatar" src="assets/images/players/player2.png" alt="Player 2">
+                    <span class="player-name">Player 2</span>
+                    <button class="player-toggle" aria-label="Show more">&#9660;</button>
+                </div>
+                <div class="player-dropdown">
+                    <div class="player-dropdown-inner">
+                        <p>INFO about Player 2. Add more details here.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="player-box">
+                <div class="player-main">
+                    <img class="player-avatar" src="assets/images/players/player3.png" alt="Player 3">
+                    <span class="player-name">Player 3</span>
+                    <button class="player-toggle" aria-label="Show more">&#9660;</button>
+                </div>
+                <div class="player-dropdown">
+                    <div class="player-dropdown-inner">
+                        <p>INFO about Player 3. Add more details here.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="player-box">
+                <div class="player-main">
+                    <img class="player-avatar" src="assets/images/players/player4.png" alt="Player 4">
+                    <span class="player-name">Player 4</span>
+                    <button class="player-toggle" aria-label="Show more">&#9660;</button>
+                </div>
+                <div class="player-dropdown">
+                    <div class="player-dropdown-inner">
+                        <p>INFO about Player 4. Add more details here.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- ...add up to 14 player-boxes in total... -->
+        </div>
+    </section>
+
+    <!-- Mobile menu nav (outside header, for mobile only) -->
+    <nav class="main-nav mobile-nav">
+        <div class="nav-item">
+            <a href="#what" class="nav-link">
+                What is Freaky SMP?
+                <img src="assets/images/nav-what.png" alt="" class="nav-img">
+            </a>
+        </div>
+        <div class="nav-item">
+            <a href="#about" class="nav-link">
+                About
+                <img src="assets/images/nav-about.png" alt="" class="nav-img">
+            </a>
+        </div>
+        <div class="nav-item">
+            <a href="#players" class="nav-link">
+                Players
+                <img src="assets/images/nav-players.png" alt="" class="nav-img">
+            </a>
+        </div>
+        <div class="nav-item">
+            <a href="#lore" class="nav-link">
+                Lore
+                <img src="assets/images/nav-lore.png" alt="" class="nav-img">
+            </a>
+        </div>
+    </nav>
+
     <!-- Add GSAP CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+    // GSAP hover animation for image labels
+    document.querySelectorAll('.img-hover-wrap').forEach(function(wrap) {
+        const img = wrap.querySelector('img');
+        const label = wrap.querySelector('.img-hover-label');
+        label.style.opacity = 0;
+        label.style.transform = 'translateY(20px)';
+        img.addEventListener('mouseenter', function() {
+            gsap.to(label, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" });
+        });
+        img.addEventListener('mouseleave', function() {
+            gsap.to(label, { opacity: 0, y: 20, duration: 0.25, ease: "power2.in" });
+        });
+    });
+
+    // Mobile menu open/close logic
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileNav = document.querySelector('.main-nav.mobile-nav');
+    function handleMenu() {
+        mobileNav.classList.toggle('open');
+        menuToggle.classList.toggle('open');
+        document.body.classList.toggle('menu-open');
+    }
+    menuToggle.addEventListener('click', handleMenu);
+    // Close menu when clicking a link (optional)
+    mobileNav.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileNav.classList.remove('open');
+            menuToggle.classList.remove('open');
+            document.body.classList.remove('menu-open');
+        });
+    });
+
+    // Player dropdown logic (new)
+    document.querySelectorAll('.player-toggle').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            const box = btn.closest('.player-box');
+            box.classList.toggle('open');
+        });
+    });
+    </script>
 </body>
 </html>
