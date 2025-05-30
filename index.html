@@ -106,7 +106,7 @@
     <section id="players" class="section-players">
         <div class="players-intro">
             <h2>Players</h2>
-            <p>Meet the members of Freaky SMP! Click the arrow to see more info.</p>
+            <p>Meet the members of Freaky SMP! (sezon 1 & 2) Click the arrow to see more info.</p>
         </div>
         <div class="players-grid">
             <div class="player-box">
@@ -117,7 +117,7 @@
                 </div>
                 <div class="player-dropdown">
                     <div class="player-dropdown-inner">
-                        <p>Every Sezon Of FreakySMP ended because people destroyed it (trust).</p>
+                        <p>Creator Of FreakySMP, and this website you are on!</p>
                     </div>
                 </div>
             </div>
@@ -129,7 +129,7 @@
                 </div>
                 <div class="player-dropdown">
                     <div class="player-dropdown-inner">
-                        <p>I like ur mom.</p>
+                        <p>Mainly a helper and active mod.</p>
                     </div>
                 </div>
             </div>
@@ -141,7 +141,7 @@
                 </div>
                 <div class="player-dropdown">
                     <div class="player-dropdown-inner">
-                        <p>INFO about Player 3. Add more details here.</p>
+                        <p>Friend That Played on the first sezon, and a bit after publishing freakysmp to friends.</p>
                     </div>
                 </div>
             </div>
@@ -153,7 +153,7 @@
                 </div>
                 <div class="player-dropdown">
                     <div class="player-dropdown-inner">
-                        <p>INFO about Player 4. Add more details here.</p>
+                        <p>Mainly a pvper.</p>
                     </div>
                 </div>
             </div>
@@ -165,7 +165,7 @@
                 </div>
                 <div class="player-dropdown">
                     <div class="player-dropdown-inner">
-                        <p>INFO about Player 5. Add more details here.</p>
+                        <p>Builder & pvper.</p>
                     </div>
                 </div>
             </div>
@@ -177,7 +177,7 @@
                 </div>
                 <div class="player-dropdown">
                     <div class="player-dropdown-inner">
-                        <p>INFO about Player 6. Add more details here.</p>
+                        <p>One of the most active players.. But also one of the most destructive players</p>
                     </div>
                 </div>
             </div>
@@ -189,7 +189,7 @@
                 </div>
                 <div class="player-dropdown">
                     <div class="player-dropdown-inner">
-                        <p>INFO about Player 7. Add more details here.</p>
+                        <p>Passions: Cheats</p>
                     </div>
                 </div>
             </div>
@@ -201,7 +201,7 @@
                 </div>
                 <div class="player-dropdown">
                     <div class="player-dropdown-inner">
-                        <p>INFO about Player 8. Add more details here.</p>
+                        <p>Bro nuked 2 sezons- damn nice job pulling this off.</p>
                     </div>
                 </div>
             </div>
@@ -213,7 +213,7 @@
                 </div>
                 <div class="player-dropdown">
                     <div class="player-dropdown-inner">
-                        <p>INFO about Player 9. Add more details here.</p>
+                        <p>Chill Player, Building and just enjoing life</p>
                     </div>
                 </div>
             </div>
@@ -225,7 +225,7 @@
                 </div>
                 <div class="player-dropdown">
                     <div class="player-dropdown-inner">
-                        <p>INFO about Player 10. Add more details here.</p>
+                        <p>Played First sezon and never again :(</p>
                     </div>
                 </div>
             </div>
@@ -237,7 +237,7 @@
                 </div>
                 <div class="player-dropdown">
                     <div class="player-dropdown-inner">
-                        <p>INFO about Player 11. Add more details here.</p>
+                        <p>The Star of freakysmp (loves pvp with spaming axes).</p>
                     </div>
                 </div>
             </div>
@@ -249,7 +249,7 @@
                 </div>
                 <div class="player-dropdown">
                     <div class="player-dropdown-inner">
-                        <p>INFO about Player 12. Add more details here.</p>
+                        <p>this bro was at freakysmp???.</p>
                     </div>
                 </div>
             </div>
@@ -273,7 +273,7 @@
                 </div>
                 <div class="player-dropdown">
                     <div class="player-dropdown-inner">
-                        <p>INFO about Player 14. Add more details here.</p>
+                        <p>Wamted to have the most deaths (falied horribly).</p>
                     </div>
                 </div>
             </div>
@@ -351,7 +351,19 @@
     document.querySelectorAll('.player-toggle').forEach(function(btn) {
         btn.addEventListener('click', function() {
             const box = btn.closest('.player-box');
+            const dropdown = box.querySelector('.player-dropdown');
+            const inner = box.querySelector('.player-dropdown-inner');
             box.classList.toggle('open');
+            if (box.classList.contains('open')) {
+                // Hide instantly, then fade in
+                gsap.set(inner, { opacity: 0, y: 20, display: "block" });
+                gsap.to(inner, { opacity: 1, y: 0, duration: 0.32, ease: "power2.out", delay: 0.05 });
+            } else {
+                // Fade out, then hide
+                gsap.to(inner, { opacity: 0, y: 20, duration: 0.22, ease: "power2.in", onComplete: function() {
+                    gsap.set(inner, { clearProps: "opacity,transform,display" });
+                }});
+            }
         });
     });
 
@@ -395,6 +407,16 @@
             gsap.to(aboutText, { x: 0, scale: 1, boxShadow: "0 2px 12px 0 rgba(0,0,0,0.08)", duration: 0.22, ease: "power2.in" });
         });
     }
+
+    // GSAP hover animation for player-main (pop up effect)
+    document.querySelectorAll('.player-main').forEach(function(el) {
+        el.addEventListener('mouseenter', function() {
+            gsap.to(el, { scale: 1.045, boxShadow: "0 8px 28px 0 rgba(0,0,0,0.16)", duration: 0.18, ease: "power2.out" });
+        });
+        el.addEventListener('mouseleave', function() {
+            gsap.to(el, { scale: 1, boxShadow: "0 2px 12px 0 rgba(0,0,0,0.08)", duration: 0.18, ease: "power2.in" });
+        });
+    });
     </script>
 </body>
 </html>
