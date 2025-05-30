@@ -16,15 +16,24 @@ h1 {
     width: 100vw;
     height: 120px;
     z-index: 100;
-    backdrop-filter: blur(6px);
-    background: transparent;
+    /* Blur gradient: strong blur at top, fading to less at bottom */
+    background: linear-gradient(
+        to bottom,
+        rgba(60,60,60,0.25) 0%,
+        rgba(60,60,60,0.12) 60%,
+        rgba(60,60,60,0.01) 100%
+    );
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    /* Simulate less blur at the bottom with a gradient mask */
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,0.2) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,0.2) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 12px;
     flex-wrap: wrap;
     min-width: 0;
-    /* Optional: add a subtle shadow for separation */
     box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
 }
 #logo-link {
@@ -191,6 +200,39 @@ h1 {
     background: #eaeaea;
 }
 
+/* New image grid styles */
+.what-image-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.what-image-row {
+    display: flex;
+    flex-direction: row;
+    gap: 18px;
+    justify-content: center;
+    width: 100%;
+}
+
+.what-image-row img {
+    max-width: 180px;
+    max-height: 160px;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
+    background: #eaeaea;
+    width: 100%;
+    object-fit: cover;
+}
+
+.what-image-row:last-child img {
+    max-width: 380px;
+    max-height: 180px;
+}
+
 /* Responsive for mobile */
 @media (max-width: 900px) {
     .section-what {
@@ -209,6 +251,16 @@ h1 {
     .what-image img {
         max-height: 200px;
     }
+    .what-image-row {
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+    }
+    .what-image-row img,
+    .what-image-row:last-child img {
+        max-width: 100%;
+        max-height: 160px;
+    }
 }
 
 .start-exploring-container {
@@ -225,32 +277,37 @@ h1 {
     font-family: 'Minecraft', Arial, sans-serif;
     font-weight: bold;
     font-size: 1.2rem;
-    background: #39ff14;
+    background: #cccccc; /* Gray background */
     color: #222;
-    border: none;
-    border-radius: 10px;
+    border: 4px solid #111; /* Thick, hard-edged black outline */
+    border-radius: 0;       /* Hard edges */
     padding: 16px 36px 12px 36px;
     cursor: pointer;
     box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: background 0.18s, transform 0.15s;
+    transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.15s;
     position: relative;
     outline: none;
 }
 
 .start-exploring-btn:hover, .start-exploring-btn:focus {
-    background: #22b80f;
-    color: #fff;
+    background: #bdbdbd;
+    color: #111;
+    border-color: #222;
     transform: translateY(2px) scale(1.04);
 }
 
 .start-exploring-btn .down-arrows {
-    font-size: 1.5rem;
-    line-height: 1;
-    margin-top: 2px;
-    letter-spacing: 2px;
+    display: none;
+}
+
+.start-exploring-arrow {
+    width: 32px;
+    height: 32px;
+    margin-top: 4px;
     display: block;
+    object-fit: contain;
     filter: drop-shadow(0 2px 0 #222);
 }
