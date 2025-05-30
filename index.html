@@ -7,12 +7,6 @@
     <link rel="stylesheet" href="fonts/fonts.css">
 </head>
 <body>
-    <!-- Mobile menu toggle button (bottom right, not in header) -->
-    <button id="menu-toggle" aria-label="Open menu">
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-        <span class="menu-bar"></span>
-    </button>
     <!-- Header with logo and navigation -->
     <header class="blurred-header">
         <a href="#" id="logo-link">
@@ -168,39 +162,11 @@
         </div>
     </section>
 
-    <!-- Mobile menu nav (outside header, for mobile only) -->
-    <nav class="main-nav mobile-nav">
-        <div class="nav-item">
-            <a href="#what" class="nav-link">
-                What is Freaky SMP?
-                <img src="assets/images/nav-what.png" alt="" class="nav-img">
-            </a>
-        </div>
-        <div class="nav-item">
-            <a href="#about" class="nav-link">
-                About
-                <img src="assets/images/nav-about.png" alt="" class="nav-img">
-            </a>
-        </div>
-        <div class="nav-item">
-            <a href="#players" class="nav-link">
-                Players
-                <img src="assets/images/nav-players.png" alt="" class="nav-img">
-            </a>
-        </div>
-        <div class="nav-item">
-            <a href="#lore" class="nav-link">
-                Lore
-                <img src="assets/images/nav-lore.png" alt="" class="nav-img">
-            </a>
-        </div>
-    </nav>
-
     <!-- Add GSAP CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="js/main.js"></script>
     <script>
-    // GSAP hover animation for image labels
+    // Add GSAP hover animation for image labels
     document.querySelectorAll('.img-hover-wrap').forEach(function(wrap) {
         const img = wrap.querySelector('img');
         const label = wrap.querySelector('.img-hover-label');
@@ -211,24 +177,6 @@
         });
         img.addEventListener('mouseleave', function() {
             gsap.to(label, { opacity: 0, y: 20, duration: 0.25, ease: "power2.in" });
-        });
-    });
-
-    // Mobile menu open/close logic
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileNav = document.querySelector('.main-nav.mobile-nav');
-    function handleMenu() {
-        mobileNav.classList.toggle('open');
-        menuToggle.classList.toggle('open');
-        document.body.classList.toggle('menu-open');
-    }
-    menuToggle.addEventListener('click', handleMenu);
-    // Close menu when clicking a link (optional)
-    mobileNav.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            mobileNav.classList.remove('open');
-            menuToggle.classList.remove('open');
-            document.body.classList.remove('menu-open');
         });
     });
 
