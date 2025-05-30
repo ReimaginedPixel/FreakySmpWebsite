@@ -374,21 +374,27 @@
         );
     });
 
-    // GSAP smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
-        link.addEventListener('click', function(e) {
-            const targetId = link.getAttribute('href').slice(1);
-            const target = document.getElementById(targetId);
-            if (target) {
-                e.preventDefault();
-                gsap.to(window, {
-                    duration: 0.8,
-                    scrollTo: { y: target, offsetY: 80 },
-                    ease: "power2.inOut"
-                });
-            }
+    // GSAP hover animation for .what-text (slide right)
+    const whatText = document.querySelector('.what-text');
+    if (whatText) {
+        whatText.addEventListener('mouseenter', function() {
+            gsap.to(whatText, { x: 14, scale: 1.02, boxShadow: "0 6px 24px 0 rgba(0,0,0,0.13)", duration: 0.22, ease: "power2.out" });
         });
-    });
+        whatText.addEventListener('mouseleave', function() {
+            gsap.to(whatText, { x: 0, scale: 1, boxShadow: "0 2px 12px 0 rgba(0,0,0,0.08)", duration: 0.22, ease: "power2.in" });
+        });
+    }
+
+    // GSAP hover animation for .about-text (slide left)
+    const aboutText = document.querySelector('.about-text');
+    if (aboutText) {
+        aboutText.addEventListener('mouseenter', function() {
+            gsap.to(aboutText, { x: -14, scale: 1.02, boxShadow: "0 6px 24px 0 rgba(0,0,0,0.13)", duration: 0.22, ease: "power2.out" });
+        });
+        aboutText.addEventListener('mouseleave', function() {
+            gsap.to(aboutText, { x: 0, scale: 1, boxShadow: "0 2px 12px 0 rgba(0,0,0,0.08)", duration: 0.22, ease: "power2.in" });
+        });
+    }
     </script>
 </body>
 </html>

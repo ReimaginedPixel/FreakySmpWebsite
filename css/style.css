@@ -189,6 +189,8 @@ h1 {
     align-items: flex-start;
     min-width: 340px;
     max-width: 700px;
+    transition: box-shadow 0.18s;
+    /* no transform here, handled by GSAP */
 }
 .what-text h2 {
     font-family: 'Minecraft', Arial, sans-serif;
@@ -476,6 +478,8 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    transition: box-shadow 0.18s;
+    /* no transform here, handled by GSAP */
 }
 .about-text h2 {
     font-family: 'Minecraft', Arial, sans-serif;
