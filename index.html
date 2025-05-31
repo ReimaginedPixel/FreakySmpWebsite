@@ -539,60 +539,84 @@
     // Gallery lightbox for screenshots with left/right arrows
     (function() {
         const images = Array.from(document.querySelectorAll('.gallery-img'));
+        let lightboxOpen = false;
+        let backdrop, fullImg, label, closeBtn, leftBtn, rightBtn;
+        let currentIndex = 0;
+
+        function removeLightbox() {
+            if (backdrop && backdrop.parentNode) {
+                backdrop.parentNode.removeChild(backdrop);
+            }
+            document.removeEventListener('keydown', keyListener);
+            lightboxOpen = false;
+            backdrop = fullImg = label = closeBtn = leftBtn = rightBtn = null;
+        }
+
+        function keyListener(e) {
+            if (!lightboxOpen) return;
+            if (e.key === 'ArrowLeft') {
+                showImage(currentIndex - 1, 'left');
+            } else if (e.key === 'ArrowRight') {
+                showImage(currentIndex + 1, 'right');
+            } else if (e.key === 'Escape') {
+                removeLightbox();
+            }
+        }
+
+        function showImage(newIdx, direction) {
+            if (!lightboxOpen) return;
+            if (newIdx < 0) newIdx = images.length - 1;
+            if (newIdx >= images.length) newIdx = 0;
+            gsap.to(fullImg, { opacity: 0, x: direction === 'left' ? 80 : -80, duration: 0.22, onComplete: function() {
+                updateImage(newIdx);
+                gsap.fromTo(fullImg, { opacity: 0, x: direction === 'left' ? -80 : 80 }, { opacity: 1, x: 0, duration: 0.22 });
+            }});
+            currentIndex = newIdx;
+        }
+
+        function updateImage(idx) {
+            fullImg.src = images[idx].src;
+            fullImg.alt = images[idx].alt;
+            let labelText = images[idx].getAttribute('data-label') || images[idx].getAttribute('alt') || '';
+            label.textContent = labelText;
+        }
+
         images.forEach(function(img, idx) {
             img.addEventListener('click', function() {
-                let currentIndex = idx;
+                // Remove any existing lightbox before opening a new one
+                removeLightbox();
+
+                currentIndex = idx;
+                lightboxOpen = true;
 
                 // Create lightbox elements
-                const backdrop = document.createElement('div');
+                backdrop = document.createElement('div');
                 backdrop.className = 'gallery-lightbox-backdrop';
 
-                const fullImg = document.createElement('img');
+                fullImg = document.createElement('img');
                 fullImg.className = 'gallery-lightbox-img';
-                fullImg.src = images[currentIndex].src;
-                fullImg.alt = images[currentIndex].alt;
 
-                // Label
-                let labelText = images[currentIndex].getAttribute('data-label') || images[currentIndex].getAttribute('alt') || '';
-                let label = null;
-                if (labelText) {
-                    label = document.createElement('div');
-                    label.className = 'gallery-lightbox-label';
-                    label.textContent = labelText;
-                    backdrop.appendChild(label);
-                }
+                label = document.createElement('div');
+                label.className = 'gallery-lightbox-label';
 
-                // Close button
-                const closeBtn = document.createElement('button');
+                closeBtn = document.createElement('button');
                 closeBtn.className = 'gallery-lightbox-close';
                 closeBtn.innerHTML = '&times;';
 
-                // Left arrow
-                const leftBtn = document.createElement('button');
+                leftBtn = document.createElement('button');
                 leftBtn.className = 'gallery-lightbox-arrow gallery-lightbox-arrow-left';
                 leftBtn.innerHTML = '&lt;';
                 leftBtn.style.fontFamily = "'Minecraft', Arial, sans-serif";
 
-                // Right arrow
-                const rightBtn = document.createElement('button');
+                rightBtn = document.createElement('button');
                 rightBtn.className = 'gallery-lightbox-arrow gallery-lightbox-arrow-right';
                 rightBtn.innerHTML = '&gt;';
                 rightBtn.style.fontFamily = "'Minecraft', Arial, sans-serif";
 
-                // Navigation logic
-                function showImage(newIdx, direction) {
-                    if (newIdx < 0) newIdx = images.length - 1;
-                    if (newIdx >= images.length) newIdx = 0;
-                    gsap.to(fullImg, { opacity: 0, x: direction === 'left' ? 80 : -80, duration: 0.22, onComplete: function() {
-                        fullImg.src = images[newIdx].src;
-                        fullImg.alt = images[newIdx].alt;
-                        let newLabelText = images[newIdx].getAttribute('data-label') || images[newIdx].getAttribute('alt') || '';
-                        if (label) label.textContent = newLabelText;
-                        gsap.fromTo(fullImg, { opacity: 0, x: direction === 'left' ? -80 : 80 }, { opacity: 1, x: 0, duration: 0.22 });
-                    }});
-                    currentIndex = newIdx;
-                }
+                // Initial image
+                updateImage(currentIndex);
 
+                // Navigation
                 leftBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
                     showImage(currentIndex - 1, 'left');
@@ -602,36 +626,19 @@
                     showImage(currentIndex + 1, 'right');
                 });
 
-                // Keyboard navigation
-                function keyListener(e) {
-                    if (e.key === 'ArrowLeft') {
-                        showImage(currentIndex - 1, 'left');
-                    } else if (e.key === 'ArrowRight') {
-                        showImage(currentIndex + 1, 'right');
-                    } else if (e.key === 'Escape') {
-                        closeLightbox();
-                    }
-                }
-
                 // Close logic
-                function closeLightbox() {
-                    // Remove the backdrop and all its children, no matter what image is shown
-                    if (backdrop.parentNode) {
-                        backdrop.parentNode.removeChild(backdrop);
-                    }
-                    document.removeEventListener('keydown', keyListener);
-                }
                 closeBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    closeLightbox();
+                    removeLightbox();
                 });
                 backdrop.addEventListener('click', function(e) {
-                    if (e.target === backdrop) closeLightbox();
+                    if (e.target === backdrop) removeLightbox();
                 });
                 document.addEventListener('keydown', keyListener);
 
                 // Append
                 backdrop.appendChild(fullImg);
+                backdrop.appendChild(label);
                 backdrop.appendChild(closeBtn);
                 backdrop.appendChild(leftBtn);
                 backdrop.appendChild(rightBtn);
