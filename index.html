@@ -5,6 +5,8 @@
     <title>Freaky SMP Website</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="fonts/fonts.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 </head>
 <body>
     <!-- Header with logo and navigation -->
@@ -261,7 +263,7 @@
                 </div>
                 <div class="player-dropdown">
                     <div class="player-dropdown-inner">
-                        <p>" 100%% "</p>
+                        <p>Player Whit the BEST internet</p>
                     </div>
                 </div>
             </div>
@@ -318,21 +320,27 @@
                     <button id="show-less-screenshots" style="display:none;font-family:'Minecraft',Arial,sans-serif;font-size:1.1rem;padding:10px 28px;border-radius:8px;border:2px solid #222;background:#eee;cursor:pointer;transition:background 0.18s;">Show Less</button>
                 </div>
             </div>
-            <div class="gallery-funny">
-                <h3>Clips & Funny Moments</h3>
-                <div class="gallery-funny-grid">
-                    <video class="gallery-clip" controls width="320">
-                        <source src="assets/clips/funny1.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <video class="gallery-clip" controls width="320">
-                        <source src="assets/clips/funny2.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <video class="gallery-clip" controls width="320">
-                        <source src="assets/clips/funny3.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+        </div>
+    </section>
+
+    <!-- Enjoyed this project? (Support) section, not visible in menu -->
+    <section id="support" class="section-support" style="margin-top:48px; margin-bottom:48px;">
+        <div class="support-content" style="max-width:700px;margin:0 auto;display:flex;flex-direction:row;align-items:center;gap:36px;background:#fff;border-radius:16px;box-shadow:0 2px 12px 0 rgba(0,0,0,0.08);padding:38px 28px;">
+            <div class="support-image" style="flex:0 0 140px;">
+                <img src="assets/images/ko-fi-cup.png" alt="Support me on Patreon" style="width:180px;max-width:100%;border-radius:12px;box-shadow:0 2px 8px 0 rgba(0,0,0,0.10);background:#eaeaea;">
+            </div>
+            <div class="support-text" style="flex:1 1 320px;display:flex;flex-direction:column;align-items:flex-start;">
+                <h2 style="font-family:'Minecraft',Arial,sans-serif;font-size:2rem;margin:0 0 16px 0;color:#222;">Enjoyed this project?</h2>
+                <p style="font-size:1.13rem;color:#333;margin:0 0 18px 0;line-height:1.7;">
+                    If you liked Freaky SMP or this website, consider supporting me! Every coffee helps me keep building cool stuff and sharing it with you all. Thank you for your support and for being part of this journey!
+                </p>
+                <div style="display:flex;gap:18px;flex-wrap:wrap;">
+                    <a href="https://patreon.com/ReimaginedPixel" target="_blank" rel="noopener" style="display:inline-block;font-family:'Minecraft',Arial,sans-serif;font-size:1.15rem;font-weight:bold;padding:12px 32px;border-radius:10px;background:#f96854;color:#fff;text-decoration:none;box-shadow:0 2px 8px 0 rgba(0,0,0,0.10);border:2px solid #e64b2f;transition:background 0.18s;">
+                        <img src="assets/images/patreon-logo.png" alt="Patreon" style="height:1.3em;vertical-align:middle;margin-right:10px;">Support me on Patreon
+                    </a>
+                    <a href="https://linktr.ee/ReimaginedPixel" target="_blank" rel="noopener" style="display:inline-block;font-family:'Minecraft',Arial,sans-serif;font-size:1.15rem;font-weight:bold;padding:12px 32px;border-radius:10px;background:#4e8cff;color:#fff;text-decoration:none;box-shadow:0 2px 8px 0 rgba(0,0,0,0.10);border:2px solid #2b5ca8;transition:background 0.18s;">
+                        🌐 All My Links
+                    </a>
                 </div>
             </div>
         </div>
@@ -462,81 +470,13 @@
         );
     }
 
-    // Gallery lightbox for screenshots
-    document.querySelectorAll('.gallery-img').forEach(function(img) {
-        img.addEventListener('click', function() {
-            // Create lightbox elements
-            const backdrop = document.createElement('div');
-            backdrop.className = 'gallery-lightbox-backdrop';
-            const fullImg = document.createElement('img');
-            fullImg.className = 'gallery-lightbox-img';
-            fullImg.src = img.src;
-            fullImg.alt = img.alt;
+    // Remove gallery lightbox for screenshots (disable fullscreen on click)
+    // (No longer needed, handled below. Remove this block.)
+    // document.querySelectorAll('.gallery-img').forEach(function(img) {
+    //     img.onclick = null;
+    // });
 
-            // Try to get label from the gallery image's alt or data-label
-            let labelText = img.getAttribute('data-label') || img.getAttribute('alt') || '';
-            if (labelText) {
-                const label = document.createElement('div');
-                label.className = 'gallery-lightbox-label';
-                label.textContent = labelText;
-                // Position label absolutely over the image
-                backdrop.appendChild(label);
-            }
-
-            const closeBtn = document.createElement('button');
-            closeBtn.className = 'gallery-lightbox-close';
-            closeBtn.innerHTML = '&times;';
-
-            // Close logic
-            function closeLightbox() {
-                document.body.removeChild(backdrop);
-            }
-            closeBtn.addEventListener('click', closeLightbox);
-            backdrop.addEventListener('click', function(e) {
-                if (e.target === backdrop) closeLightbox();
-            });
-            document.addEventListener('keydown', function escListener(e) {
-                if (e.key === 'Escape') {
-                    closeLightbox();
-                    document.removeEventListener('keydown', escListener);
-                }
-            });
-
-            // Append
-            backdrop.appendChild(fullImg);
-            backdrop.appendChild(closeBtn);
-            document.body.appendChild(backdrop);
-        });
-    });
-
-    // Show more/less screenshots button logic
-    (function() {
-        var btnMore = document.getElementById('show-more-screenshots');
-        var btnLess = document.getElementById('show-less-screenshots');
-        if (btnMore && btnLess) {
-            btnMore.addEventListener('click', function() {
-                document.querySelectorAll('.gallery-img-extra').forEach(function(img) {
-                    img.style.display = 'inline-block';
-                });
-                btnMore.style.display = 'none';
-                btnLess.style.display = '';
-            });
-            btnLess.addEventListener('click', function() {
-                document.querySelectorAll('.gallery-img-extra').forEach(function(img) {
-                    img.style.display = 'none';
-                });
-                btnMore.style.display = '';
-                btnLess.style.display = 'none';
-                // Optionally scroll back to the screenshots section
-                var grid = document.getElementById('gallery-images-grid');
-                if (grid) {
-                    grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        }
-    })();
-
-    // Gallery lightbox for screenshots with left/right arrows
+    // Gallery lightbox for screenshots with left/right arrows and GSAP animation
     (function() {
         const images = Array.from(document.querySelectorAll('.gallery-img'));
         let lightboxOpen = false;
@@ -565,6 +505,7 @@
 
         function showImage(newIdx, direction) {
             if (!lightboxOpen) return;
+            if (typeof newIdx !== 'number' || isNaN(newIdx)) return;
             if (newIdx < 0) newIdx = images.length - 1;
             if (newIdx >= images.length) newIdx = 0;
             gsap.to(fullImg, { opacity: 0, x: direction === 'left' ? 80 : -80, duration: 0.22, onComplete: function() {
@@ -575,6 +516,7 @@
         }
 
         function updateImage(idx) {
+            if (!images[idx]) return;
             fullImg.src = images[idx].src;
             fullImg.alt = images[idx].alt;
             let labelText = images[idx].getAttribute('data-label') || images[idx].getAttribute('alt') || '';
@@ -582,7 +524,8 @@
         }
 
         images.forEach(function(img, idx) {
-            img.addEventListener('click', function() {
+            img.onclick = function(e) {
+                e.stopPropagation();
                 // Remove any existing lightbox before opening a new one
                 removeLightbox();
 
@@ -601,17 +544,15 @@
 
                 closeBtn = document.createElement('button');
                 closeBtn.className = 'gallery-lightbox-close';
-                closeBtn.innerHTML = '&times;';
+                closeBtn.innerHTML = '<span style="font-family:\'Minecraft\',Arial,sans-serif;font-size:2.2rem;">X</span>';
 
                 leftBtn = document.createElement('button');
                 leftBtn.className = 'gallery-lightbox-arrow gallery-lightbox-arrow-left';
-                leftBtn.innerHTML = '&lt;';
-                leftBtn.style.fontFamily = "'Minecraft', Arial, sans-serif";
+                leftBtn.innerHTML = '<span style="font-family:\'Minecraft\',Arial,sans-serif;font-size:2.2rem;">&lt;</span>';
 
                 rightBtn = document.createElement('button');
                 rightBtn.className = 'gallery-lightbox-arrow gallery-lightbox-arrow-right';
-                rightBtn.innerHTML = '&gt;';
-                rightBtn.style.fontFamily = "'Minecraft', Arial, sans-serif";
+                rightBtn.innerHTML = '<span style="font-family:\'Minecraft\',Arial,sans-serif;font-size:2.2rem;">&gt;</span>';
 
                 // Initial image
                 updateImage(currentIndex);
@@ -636,6 +577,12 @@
                 });
                 document.addEventListener('keydown', keyListener);
 
+                // Prevent scrolling when lightbox is open
+                document.body.style.overflow = 'hidden';
+                backdrop.addEventListener('remove', function() {
+                    document.body.style.overflow = '';
+                });
+
                 // Append
                 backdrop.appendChild(fullImg);
                 backdrop.appendChild(label);
@@ -643,9 +590,59 @@
                 backdrop.appendChild(leftBtn);
                 backdrop.appendChild(rightBtn);
                 document.body.appendChild(backdrop);
-            });
+            };
+        });
+
+        // Restore scrolling when lightbox closes
+        function restoreScroll() {
+            document.body.style.overflow = '';
+        }
+        window.addEventListener('click', function() {
+            if (!lightboxOpen) restoreScroll();
+        });
+        window.addEventListener('keydown', function(e) {
+            if (!lightboxOpen && e.key === 'Escape') restoreScroll();
         });
     })();
+
+    // Fix Show More/Less button logic for screenshots
+    (function() {
+        var btnMore = document.getElementById('show-more-screenshots');
+        var btnLess = document.getElementById('show-less-screenshots');
+        var extraImgs = document.querySelectorAll('.gallery-img-extra');
+        if (btnMore && btnLess) {
+            btnMore.addEventListener('click', function() {
+                extraImgs.forEach(function(img) {
+                    img.style.display = 'inline-block';
+                });
+                btnMore.style.display = 'none';
+                btnLess.style.display = 'inline-block';
+            });
+            btnLess.addEventListener('click', function() {
+                extraImgs.forEach(function(img) {
+                    img.style.display = 'none';
+                });
+                btnMore.style.display = 'inline-block';
+                btnLess.style.display = 'none';
+                // Optionally scroll back to the screenshots section
+                var grid = document.getElementById('gallery-images-grid');
+                if (grid) {
+                    grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+            // On page load, ensure correct state
+            btnMore.style.display = 'inline-block';
+            btnLess.style.display = 'none';
+            extraImgs.forEach(function(img) {
+                img.style.display = 'none';
+            });
+        }
+    })();
     </script>
+    <footer class="site-footer" style="width:100%;background:#232323;color:#fff;text-align:center;padding:32px 0 18px 0;font-family:'Minecraft',Arial,sans-serif;font-size:1.1rem;letter-spacing:1px;margin-top:48px;">
+        <div style="max-width:900px;margin:0 auto;">
+            <span>&copy; 2025 Freaky SMP Website &mdash; Made with ❤️ by ReimaginedPixel</span>
+        </div>
+    </footer>
 </body>
 </html>

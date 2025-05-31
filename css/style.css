@@ -781,6 +781,18 @@ h1 {
     box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
     z-index: 2;
 }
+.gallery-images h3,
+.gallery-videos h3,
+.gallery-funny h3 {
+    text-align: center;
+}
+
+/* Show More/Less button fix */
+#show-more-screenshots,
+#show-less-screenshots {
+    display: inline-block;
+    /* ...existing inline styles from HTML will be overridden by this if needed... */
+}
 
 /* Lightbox styles */
 .gallery-lightbox-backdrop {
@@ -874,7 +886,15 @@ h1 {
 .gallery-lightbox-arrow-right {
     right: 24px;
 }
+.gallery-lightbox-arrow span {
+    font-family: 'Minecraft', Arial, sans-serif;
+    font-size: 2.2rem;
+}
 .gallery-lightbox-arrow:hover {
     background: #fff;
     color: #222;
+}
+.gallery-lightbox-close span {
+    font-family: 'Minecraft', Arial, sans-serif;
+    font-size: 2.2rem;
 }
