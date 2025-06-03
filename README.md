@@ -2,6 +2,10 @@
 
 This is the official website for Freaky SMP, a Minecraft survival multiplayer server that started as a way to bring classmates together and grew into a unique, chaotic, and memorable community.
 
+**View the website here:**  
+[https://reimaginedpixel.github.io/FreakySmpWebsite/](https://reimaginedpixel.github.io/FreakySmpWebsite/)  
+*(This is the live version of the webpage.)*
+
 ## About the Website
 
 - **Showcases the history and spirit of Freaky SMP**: Learn about the origins, seasons, and the players who made the server special.
